@@ -1,0 +1,37 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="form">
+            <form>
+                <fieldset class="form-group">
+                    <label for="">First name</label>
+                    <input type="text" class="form-control" ng-model="register.firstName" placeholder="Your first name">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="">Last name</label>
+                    <input type="text" class="form-control" ng-model="register.lastName" placeholder="Your last name">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="">Address</label>
+                    <input type="text" class="form-control" ng-model="register.address" placeholder="Your address">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="">E-mail</label>
+                    <input type="email" class="form-control" ng-model="register.email" placeholder="Email you want to sign in with">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="">phone</label>
+                    <input type="number" class="form-control" ng-model="register.phoneNumber" placeholder="phone number">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" ng-model="register.password" placeholder="Your password">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" ng-model="register.confirmPassword" placeholder="Confirm password">
+                </fieldset>
+            </form>
+            <button type="submit" class="btn btn-primary" ng-click="registerNewUser()">Register</button>
+        </div>
+    </div>
+</div>

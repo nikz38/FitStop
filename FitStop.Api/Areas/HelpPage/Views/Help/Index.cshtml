@@ -1,0 +1,50 @@
+@using System.Web.Http
+@using System.Web.Http.Controllers
+@using System.Web.Http.Description
+@using System.Collections.ObjectModel
+@using FitStop.Api.Areas.HelpPage.Models
+@model Collection<ApiDescription>
+
+@{
+    ViewBag.Title = "FitStop API documentation";
+
+    // Group APIs by controller
+    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+}
+
+<link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+<header class="help-page">
+    <div class="content-wrapper">
+        <div class="float-left">
+            <h1>@ViewBag.Title</h1>
+        </div>
+    </div>
+</header>
+<div id="body" class="help-page">
+    <section class="featured">
+        <div class="content-wrapper">
+            <h2>Introduction</h2>
+            <p>
+                A documentation for API calls for FitStop calorie counter app.
+            </p>
+            <div class="postman-run-button"
+                 data-postman-action="collection/import"
+                 data-postman-var-1="3e475fc23b59249eb10b"></div>
+            <script type="text/javascript">
+                (function (p, o, s, t, m, a, n) {
+                    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+                    !o.getElementById(s + t) && o.getElementsByTagName("head")[0].appendChild((
+                      (n = o.createElement("script")),
+                      (n.id = s + t), (n.async = 1), (n.src = m), n
+                    ));
+                }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+            </script>
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+        @foreach (var group in apiGroups)
+        {
+            @Html.DisplayFor(m => group, "ApiGroup")
+        }
+    </section>
+</div>

@@ -1,0 +1,21 @@
+{
+  "name": "FitStop",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-sanitize": "^1.5.0",
+    "angular-ui-router": "^0.2.18",
+    "jquery": "^2.2.1",
+    "moment": "^2.12.0",
+    "bootstrap": "https://github.com/twbs/bootstrap/tarball/v4-dev"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-ng-annotate": "^0.4.0"
+  }
+}

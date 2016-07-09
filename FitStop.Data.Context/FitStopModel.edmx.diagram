@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37b55935cc8f4bdf972643f6189b66b8" Name="Diagram1">
+        <EntityTypeShape EntityType="FitStop.Data.Context.Meal" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="FitStop.Data.Context.User" Width="1.5" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="FitStop.Data.Context.UserSetting" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="FitStop.Data.Context.FK_Meal_User" />
+        <AssociationConnector Association="FitStop.Data.Context.FK_UserSetting_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

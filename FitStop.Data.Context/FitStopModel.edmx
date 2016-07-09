@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FitStop.Data.Context.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DateTimeFor" Type="datetime" Nullable="false" />
+          <Property Name="Calories" Type="float" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ConfirmHash" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="UserSetting">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DailyCalorieIntake" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Meal_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Meal" Type="Self.Meal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meal">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSetting_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserSetting" Type="Self.UserSetting" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSetting">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitStopDataContextStoreContainer">
+          <EntitySet Name="Meal" EntityType="Self.Meal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSetting" EntityType="Self.UserSetting" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Meal_User" Association="Self.FK_Meal_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Meal" EntitySet="Meal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSetting_User" Association="Self.FK_UserSetting_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSetting" EntitySet="UserSetting" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FitStop.Data.Context" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FitStopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Meals" EntityType="FitStop.Data.Context.Meal" />
+          <EntitySet Name="Users" EntityType="FitStop.Data.Context.User" />
+          <EntitySet Name="UserSettings" EntityType="FitStop.Data.Context.UserSetting" />
+          <AssociationSet Name="FK_Meal_User" Association="FitStop.Data.Context.FK_Meal_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Meal" EntitySet="Meals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSetting_User" Association="FitStop.Data.Context.FK_UserSetting_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserSetting" EntitySet="UserSettings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EnumType Name="UserRole" a:ExternalTypeName="FitStop.Common.UserRole" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateTimeFor" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Calories" Type="Double" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="FitStop.Data.Context.FK_Meal_User" FromRole="Meal" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EMail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="FitStop.Data.Context.UserRole" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="ConfirmHash" Type="Guid" />
+          <NavigationProperty Name="Meals" Relationship="FitStop.Data.Context.FK_Meal_User" FromRole="User" ToRole="Meal" />
+          <NavigationProperty Name="UserSetting" Relationship="FitStop.Data.Context.FK_UserSetting_User" FromRole="User" ToRole="UserSetting" />
+        </EntityType>
+        <EntityType Name="UserSetting">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DailyCalorieIntake" Type="Double" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="FitStop.Data.Context.FK_UserSetting_User" FromRole="UserSetting" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Meal_User">
+          <End Type="FitStop.Data.Context.User" Role="User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FitStop.Data.Context.Meal" Role="Meal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Meal">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSetting_User">
+          <End Type="FitStop.Data.Context.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FitStop.Data.Context.UserSetting" Role="UserSetting" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSetting">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FitStopDataContextStoreContainer" CdmEntityContainer="FitStopEntities">
+          <EntitySetMapping Name="Meals">
+            <EntityTypeMapping TypeName="FitStop.Data.Context.Meal">
+              <MappingFragment StoreEntitySet="Meal">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Calories" ColumnName="Calories" />
+                <ScalarProperty Name="DateTimeFor" ColumnName="DateTimeFor" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FitStop.Data.Context.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ConfirmHash" ColumnName="ConfirmHash" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSettings">
+            <EntityTypeMapping TypeName="FitStop.Data.Context.UserSetting">
+              <MappingFragment StoreEntitySet="UserSetting">
+                <ScalarProperty Name="DailyCalorieIntake" ColumnName="DailyCalorieIntake" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,19 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="form">
+            <form>
+                <fieldset class="form-group">
+                    <label for="formGroupExampleInput">E-mail</label>
+                    <input type="text" class="form-control" ng-model="user.email" placeholder="Your e-mail address">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="formGroupExampleInput2">Password</label>
+                    <input type="text" class="form-control" ng-model="user.password" placeholder="Your passwrd">
+                </fieldset>
+            </form>
+            <div ui-sref="layout.reset-password">Forgot your password?</div>
+            <button type="submit" class="btn btn-primary" ng-click="user.login()">Log in</button>
+            
+        </div>
+    </div>
+</div>

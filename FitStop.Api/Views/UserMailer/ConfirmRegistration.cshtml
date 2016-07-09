@@ -1,0 +1,5 @@
+<h3>Confirm Registration</h3>
+<hr />
+<p>Thank you for registering! Please, follow the link bellow to confirm your registration.</p>
+<a href="http://@(ViewBag.BaseUrl.ToString())/api/users/confirmregistration?id=@ViewBag.Id.ToString()&hash=@ViewBag.Hash.ToString()">Click to confirm registration</a>
+<p>You will be redirected to login to the app.</p>
