@@ -15,6 +15,7 @@
         <th>Role</th>
         <th>Full name</th>
         <th>Email</th>
+        <th>Active status</th>
         <th>Daily Calorie Intake</th>
         <th>action</th>
     </tr>
@@ -23,6 +24,7 @@
         <td ng-bind="user.role"></td>
         <td>{{user.firstName}} {{user.lastName}}</td>
         <td ng-bind="user.eMail"></td>
+        <td ng-bind="user.active"></td>
         <td ng-bind="user.dailyCalorieIntake"></td>
         <td>
             <button ng-click="userActions.deleteUser(user.id,$index)">Delete user</button>

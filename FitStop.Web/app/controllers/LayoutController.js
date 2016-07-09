@@ -2,10 +2,15 @@
 
     $scope.currentUser = userService.currentUser;
 
+
+
     $scope.user = {
         email: 'software@enginee.rs',
         password: 'software',
         emailToReset: '',
+        newPassword: '',
+        hash: $state.params.hash || '',
+
 
         login: function () {
             userService.login($scope.user.email, $scope.user.password,
@@ -31,8 +36,12 @@
 
         resetUserPassword: function (email) {
             userService.resetPassword(email);
-        }
+        },
+
+        setNewPassword: function (email, password, hash) {
+            userService.setNewPassword(email, password, hash);
+    }
 
     };
-
+    console.log($scope.user.hash);
 });

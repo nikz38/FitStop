@@ -118,8 +118,31 @@
 
             }
         },
-        function () {
-            throw 'userService.login: Failure';
+        function (response) {
+            throw response.data.message;
+        });
+    };
+
+    factory.setNewPassword = function (email, password, hash) {
+        return $http({
+            url: config.baseAddress + 'users/SetNewPassword',
+            method: 'PUT',
+            data: {
+                eMail: email,
+                confirmHash: hash,
+                newPassword: password
+            }
+        })
+        .then(function (response) {
+            if (response.data) {
+                console.log(response.data);
+            }
+            else {
+
+            }
+        },
+        function (response) {
+            throw response.data.message;
         });
     };
 

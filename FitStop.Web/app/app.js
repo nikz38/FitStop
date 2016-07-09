@@ -30,6 +30,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
                 url: '/dashboard',
                 controller: 'DashboardController',
                 templateUrl: '/views/dashboard.html',
+            })
+            .state('layout.ResetPasswordConfirmation', {
+                url: '/reset-password/change-password/:hash',
+                //controller: 'LayoutController',
+                templateUrl: '/views/ResetPasswordConfirmation.html',
             });
 
     $locationProvider.html5Mode(true);

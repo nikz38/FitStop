@@ -30,6 +30,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationP
                 url: '/dashboard',
                 controller: 'DashboardController',
                 templateUrl: '/views/dashboard.html',
+            })
+            .state('layout.ResetPasswordConfirmation', {
+                url: '/reset-password/change-password/:hash',
+                //controller: 'LayoutController',
+                templateUrl: '/views/ResetPasswordConfirmation.html',
             });
 
     $locationProvider.html5Mode(true);
@@ -89,10 +94,15 @@ app.controller('LayoutController', ['$scope', '$state', 'userService', function 
 
     $scope.currentUser = userService.currentUser;
 
+
+
     $scope.user = {
         email: 'software@enginee.rs',
         password: 'software',
         emailToReset: '',
+        newPassword: '',
+        hash: $state.params.hash || '',
+
 
         login: function () {
             userService.login($scope.user.email, $scope.user.password,
@@ -118,10 +128,14 @@ app.controller('LayoutController', ['$scope', '$state', 'userService', function 
 
         resetUserPassword: function (email) {
             userService.resetPassword(email);
-        }
+        },
+
+        setNewPassword: function (email, password, hash) {
+            userService.setNewPassword(email, password, hash);
+    }
 
     };
-
+    console.log($scope.user.hash);
 }]);
 app.controller('LoginController', ['$scope', function ($scope) {
 
@@ -295,8 +309,31 @@ app.factory('userService', ['$http', 'config', function ($http, config) {
 
             }
         },
-        function () {
-            throw 'userService.login: Failure';
+        function (response) {
+            throw response.data.message;
+        });
+    };
+
+    factory.setNewPassword = function (email, password, hash) {
+        return $http({
+            url: config.baseAddress + 'users/SetNewPassword',
+            method: 'PUT',
+            data: {
+                eMail: email,
+                confirmHash: hash,
+                newPassword: password
+            }
+        })
+        .then(function (response) {
+            if (response.data) {
+                console.log(response.data);
+            }
+            else {
+
+            }
+        },
+        function (response) {
+            throw response.data.message;
         });
     };
 
