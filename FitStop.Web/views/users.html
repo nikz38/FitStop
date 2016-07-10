@@ -1,0 +1,24 @@
+﻿<h1>users</h1>
+
+<table ng-if="currentUser.role !='AppUser'" class="table table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Role</th>
+        <th>Full name</th>
+        <th>Email</th>
+        <th>Active status</th>
+        <th>Daily Calorie Intake</th>
+        <th>action</th>
+    </tr>
+    <tr ng-repeat="user in allUsers">
+        <td ng-bind="user.id"></td>
+        <td ng-bind="user.role"></td>
+        <td>{{user.firstName}} {{user.lastName}}</td>
+        <td ng-bind="user.eMail"></td>
+        <td ng-bind="user.active"></td>
+        <td ng-bind="user.dailyCalorieIntake"></td>
+        <td>
+            <button class="btn btn-danger" ng-click="userActions.deleteUser(user.id,$index)">Delete user</button>
+        </td>
+    </tr>
+</table>

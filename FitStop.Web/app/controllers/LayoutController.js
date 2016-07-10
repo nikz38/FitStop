@@ -1,8 +1,6 @@
-﻿app.controller('LayoutController', function ($scope, $state, userService) {
+﻿app.controller('LayoutController', function ($scope, $state, userService, $rootScope) {
 
     $scope.currentUser = userService.currentUser;
-
-
 
     $scope.user = {
         email: 'software@enginee.rs',
@@ -11,11 +9,16 @@
         newPassword: '',
         hash: $state.params.hash || '',
 
-
         login: function () {
             userService.login($scope.user.email, $scope.user.password,
             successCallback = function () {
-                $state.go('layout.dashboard');
+                if ($scope.currentUser.role != "AppUser") {
+                    $state.go('layout.dashboard.users');
+                }
+                else {
+                    $state.go('layout.dashboard.meals');
+
+                }
             });
         },
 
@@ -40,8 +43,8 @@
 
         setNewPassword: function (email, password, hash) {
             userService.setNewPassword(email, password, hash);
-    }
-
+        }
     };
-    console.log($scope.user.hash);
+
+
 });

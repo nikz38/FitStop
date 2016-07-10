@@ -1,34 +1,14 @@
-﻿<h1>Dashboard</h1>
-<button type="submit" class="btn btn-primary logout" ng-click="user.logout()">Logout</button>
+﻿<!--<button type="submit" class="btn btn-primary logout" ng-click="user.logout()">Logout</button>-->
 <div>Welcome <span ng-bind="currentUser.firstName"></span>, you are <strong ng-bind="currentUser.role"></strong> </div>
-<div>Your current calory intake is: <span ng-bind="currentUser.dailyCalorieIntake"></span></div>
+<!--<div>Your current calory intake is: <span ng-bind="currentUser.dailyCalorieIntake"></span></div>-->
 
-<button class="class=" btn btn-primary"" ng-click="meal.getMeal()">Get Meal</button>
+<!--<button class="class=" btn btn-primary"" ng-click="meal.getMeal()">Get Meal</button>
 
 <div>Meal spec:</div>
 <div ng-bind="mealInfo.id"></div>
-<div ng-bind="mealInfo.text"></div>
+<div ng-bind="mealInfo.text"></div>-->
 
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Role</th>
-        <th>Full name</th>
-        <th>Email</th>
-        <th>Active status</th>
-        <th>Daily Calorie Intake</th>
-        <th>action</th>
-    </tr>
-    <tr ng-repeat="user in allUsers">
-        <td ng-bind="user.id"></td>
-        <td ng-bind="user.role"></td>
-        <td>{{user.firstName}} {{user.lastName}}</td>
-        <td ng-bind="user.eMail"></td>
-        <td ng-bind="user.active"></td>
-        <td ng-bind="user.dailyCalorieIntake"></td>
-        <td>
-            <button ng-click="userActions.deleteUser(user.id,$index)">Delete user</button>
-        </td>
-    </tr>
-</table>
+<div ui-view></div>
+
+
 

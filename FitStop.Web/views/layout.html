@@ -1,8 +1,19 @@
 ﻿<nav class="navbar navbar-full navbar-dark bg-inverse">
+    <div class="nav navbar-nav pull-xl-right">
+        <div ng-show="showStartNav()">
+            <a class="nav-item nav-link" ui-sref="layout.login" ui-sref-active="active">Login</a>
+            <a class="nav-item nav-link" ui-sref="layout.register" ui-sref-active="active">Register</a>
+        </div>
+        <div ng-show="!showStartNav()">
+            <a class="nav-item nav-link" ng-click="user.logout()">logout, {{currentUser.firstName}}?</a>
+        </div>
+    </div>
     <div class="nav navbar-nav">
-        <a class="nav-item nav-link" ui-sref="layout.login">login</a>
-        <a class="nav-item nav-link" ui-sref="layout.register">register</a>
-        <a class="nav-item nav-link right" ng-click="user.logout()">logout</a>
+        <div ng-show="!showStartNav()">
+            <a ng-if="currentUser.role !='AppUser'" class="nav-item nav-link" ui-sref="layout.dashboard.users" ui-sref-active="active">Users</a>
+            <a class="nav-item nav-link" ui-sref="layout.dashboard.meals" ui-sref-active="active">Meals</a>
+            <a class="nav-item nav-link" ui-sref="layout.dashboard.editProfile" ui-sref-active="active">Edit Profile</a>
+        </div>
     </div>
 </nav>
 

@@ -23,7 +23,6 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
             })
             .state('layout.reset-password', {
                 url: '/reset-password',
-                //controller: 'LayoutController',
                 templateUrl: '/views/reset-password.html',
             })
             .state('layout.dashboard', {
@@ -31,9 +30,20 @@ app.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locatio
                 controller: 'DashboardController',
                 templateUrl: '/views/dashboard.html',
             })
+            .state('layout.dashboard.users', {
+                url: '/users',
+                templateUrl: '/views/users.html',
+            })
+            .state('layout.dashboard.meals', {
+                url: '/meals',
+                templateUrl: '/views/meals.html',
+            })
+            .state('layout.dashboard.editProfile', {
+                url: '/editProfile',
+                templateUrl: '/views/edit-profile.html',
+            })
             .state('layout.ResetPasswordConfirmation', {
                 url: '/reset-password/change-password/:hash',
-                //controller: 'LayoutController',
                 templateUrl: '/views/ResetPasswordConfirmation.html',
             });
 
@@ -59,6 +69,12 @@ app.run(function ($rootScope, $state) {
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
         if (toState.pageName) {
             document.title = 'FitStop | ' + toState.pageName;
+        }
+
+        $rootScope.showStartNav = function () {
+            if (toState.name == 'layout.login' || toState.name == 'layout.register') {
+                return true;
+            };
         }
     });
 
